@@ -21,6 +21,18 @@ config.env = process.env.NODE_ENV;
 // conditionally load in another config file depending on what
 // env we are in. We then merge those objects with the env config overriting
 // the default config if here. We then export that new object for our app to use
+
+//var envConfig = require('./' + config.dev); // THIS WORKS
+//but you should error check to handle any edge cases using a try-catch:
 var envConfig;
+// This will allow envConfig to still be set to an empty object even if
+  // an error is thrown
+try {
+  envConfig = require('./' + config.env);
+  // making sure the require acutlaly gets something back
+  envConfig = envConfig || {};
+} catch(err) {
+  envConfig = {};
+}
 
 module.exports = _.merge(config, envConfig);

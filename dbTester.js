@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 // and see if you see the todo below log in the terminal
 // run node db.Tester to execute this file
 // MAKE SURE MONGOD is RUNNING
+mongoose.connect('mongodb://localhost/todos');
 
 var TodoSchema = new mongoose.Schema({
   name: String,
